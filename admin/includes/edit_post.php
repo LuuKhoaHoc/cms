@@ -52,10 +52,11 @@ if (isset($_GET['p_id'])) {
         ";
         $row = mysqli_query($conn, $query);
         confirmQuery($row);
-        header("refresh: 3");
+        echo "<p class = 'bg-success'>Post Updated. <a href ='../post.php?p_id={$the_post_id}'>View Post</a> or <a href='posts.php'>Edit More Posts</a></p>";
     }
 }
 ?>
+
 <form action="" method="post" enctype="multipart/form-data">
     <div class="form-group">
         <label for="title">Post Title
@@ -69,7 +70,6 @@ if (isset($_GET['p_id'])) {
             $query = "SELECT * FROM `categories`";
             /** @var $conn */
             $row = mysqli_query($conn, $query);
-
             confirmQuery($row);
             while ($result = mysqli_fetch_assoc($row)) {
                 $cat_id = $result["cat_id"];
@@ -119,9 +119,9 @@ if (isset($_GET['p_id'])) {
         <input type="text" name="post_tags" class="form-control" value="<?= $post_tags ?>">
     </div>
     <div class="form-group">
-        <label for="post_content">Post Content
+        <label for="summernote">Post Content
         </label>
-        <textarea class="form-control" name="post_content" id="" cols="30"
+        <textarea class="form-control" name="post_content" id="summernote" cols="30"
             rows="10"><?= trim($post_content) ?></textarea>
     </div>
     <div class="form-group">

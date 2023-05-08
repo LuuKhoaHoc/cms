@@ -43,10 +43,11 @@
       <p><span class="glyphicon glyphicon-time"></span> <?= $post_date ?></p>
       <hr>
       <a href="post.php?p_id=<?= $post_id ?>">
-        <img class="img-responsive" src="images/<?= $post_image ?>" alt="hinh-anh-yeu-thuong">
+        <img class="img-responsive" src="images/<?= $post_image ?>" alt="image">
       </a>
       <hr>
       <p><?= $post_content ?></p>
+      <a class="btn btn-primary" href="post.php?p_id=<?= $post_id ?>">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
       <hr>
       <?php
         }
