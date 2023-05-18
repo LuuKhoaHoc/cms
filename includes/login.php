@@ -3,9 +3,9 @@ include "db.php";
 session_start();
 
 if (isset($_POST['login'])) {
-
     $username = $_POST['username'];
     $password = $_POST['password'];
+
     // Check if username and password are not empty
     if (!empty($username) && !empty($password)) {
 
@@ -26,10 +26,10 @@ if (isset($_POST['login'])) {
             $user_lastname = $row['user_lastname'];
             $user_role = $row['user_role'];
         }
-        $password_hash = password_hash($user_password, PASSWORD_DEFAULT);
+        // $password_hash = password_hash($user_password, PASSWORD_DEFAULT);
 
         // Check if the entered password matches the password stored in the database for the given user
-        if (password_verify($password, $password_hash)) {
+        if (password_verify($password, $user_password)) {
             // Passwords match, set session variables and redirect to dashboard
             $_SESSION['username'] = $user;
             $_SESSION['user_firstname'] = $user_firstname;
@@ -38,7 +38,7 @@ if (isset($_POST['login'])) {
             header("Location: ../admin"); // Redirect to dashboard
         } else {
             // Passwords do not match, show error message
-            header("Location: ../index.php"); 
+            header("Location: ../index.php");
         }
     } else {
         // Show error message if either username or password is empty

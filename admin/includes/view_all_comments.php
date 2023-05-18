@@ -56,7 +56,7 @@
 
             echo "<td><a href='comments.php?approved={$comment_id}'>Approved</a></td>";
             echo "<td><a href='comments.php?unapproved={$comment_id}'>Unapproved</a></td>";
-            echo "<td><a href='comments.php?delete={$comment_id}'>Delete</a></td>";
+            echo "<td><a onclick=\"javascript: return confirm('Are you sure you want to delete?');\" href='comments.php?delete={$comment_id}'>Delete</a></td>";
             echo "</tr>";
         }
 
@@ -83,4 +83,6 @@ if (isset($_GET['delete'])) {
     $delete_query = mysqli_query($conn, $query);
     header("Location: comments.php");
 }
+
+
 ?>

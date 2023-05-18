@@ -28,6 +28,7 @@ if (isset($_POST['edit_user'])) {
     $username = $_POST['username'];
     $user_email = $_POST['user_email'];
     $user_password = $_POST['user_password'];
+    $user_password_hash = password_hash($user_password, PASSWORD_DEFAULT);
     // $post_date = date('d-m-y');
     // $post_comment_count = 4;
 
@@ -39,11 +40,12 @@ if (isset($_POST['edit_user'])) {
     user_role = '{$user_role}', 
     username = '{$username}', 
     user_email = '{$user_email}', 
-    user_password = '{$user_password}' 
+    user_password = '{$user_password_hash}' 
     WHERE user_id = $the_user_id ";
 
     $edit_user_query = mysqli_query($conn, $query);
     confirmQuery($edit_user_query);
+    echo "User Updated: " . " " . "<a href='users.php'>View Users?</a>";
 }
 
 ?>
