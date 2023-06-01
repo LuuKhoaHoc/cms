@@ -12,7 +12,7 @@ if (isset($_POST['submit'])) {
         $username = mysqli_real_escape_string($conn, $username);
         $email = mysqli_real_escape_string($conn, $email);
         $password = mysqli_real_escape_string($conn, $password);
-        $password = password_hash($password, PASSWORD_DEFAULT);
+        $password = password_hash($password, PASSWORD_BCRYPT, array('cost' => 12));
 
         $query = "INSERT INTO users (`username`, `user_email`, `user_password`,`user_role`) VALUES ('$username', '$email', '$password', 'subscriber')   ";
         $register_user_query = mysqli_query($conn, $query);

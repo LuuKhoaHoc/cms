@@ -36,7 +36,7 @@
                     <div class="col-xs-6">
                         <table class="table table-bordered table-hover">
                             <thead>
-                            <tr>
+                            <tr
                                 <th>ID</th>
                                 <th>Category Titles</th>
                             </tr>
@@ -44,7 +44,7 @@
                             <tbody>
                             <tr>
                                 <?php //Find all categories query
-                                findAllCategories(); ?>
+                                findAllCategories(); ?> 
                                 <?php // DELETE QUERY
                                 deleteCategories();
                                 ?>

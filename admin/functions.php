@@ -1,5 +1,35 @@
 <?php
 
+function users_online()
+{
+    if (isset($_GET["onlineusers"])) {
+        global $conn;
+        if (!$conn) {
+            session_start();
+            include_once '../includes/db.php';
+
+            $session = session_id();
+            $time = time();
+            $time_out_in_seconds = 5;
+            $time_out = $time - $time_out_in_seconds;
+
+            $query = "SELECT * FROM users_online WHERE session = '$session'";
+            $send_query = mysqli_query($conn, $query);
+            $count = mysqli_num_rows($send_query);
+
+            if ($count == null) {
+                mysqli_query($conn, "INSERT INTO users_online (`session`, `time`) VALUES ('$session', '$time')");
+            } else {
+                mysqli_query($conn, "UPDATE users_online SET `time` = '$time' WHERE `session` = '$session'");
+            }
+            $users_online_query = mysqli_query($conn, "SELECT * FROM users_online WHERE `time` > '{$time_out}'");
+            echo $count = mysqli_num_rows($users_online_query);
+        }
+    }
+}
+
+users_online();
+
 function confirmQuery($result): void
 {
     global $conn;
@@ -54,4 +84,8 @@ function deleteCategories()
         $result = mysqli_query($conn, $query);
         header("location: categories.php");
     }
+}
+function redirect($location)
+{
+    return header("Location:" . $location);
 }
